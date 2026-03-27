@@ -23,6 +23,7 @@ A full-stack productivity tracking system with real-time updates and AI insights
 
 ```bash
 docker compose up --build
+```
 
 
 📊 Example AI Query
