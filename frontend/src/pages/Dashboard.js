@@ -65,6 +65,14 @@ export default function Dashboard() {
     window.location.href = "/";
     };
 
+    const formatTime = (time) => {
+    return new Date(time).toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  };
+
   return (
     <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">📊 Dashboard</h1>
@@ -96,8 +104,8 @@ export default function Dashboard() {
 
         {sessions.map((s) => (
           <div key={s.id} className="border-b py-2 text-sm">
-            ⏱ {new Date(s.start_time).toLocaleTimeString()} →{" "}
-            {s.end_time ? new Date(s.end_time).toLocaleTimeString() : "Running"}  
+            ⏱ {formatTime(s.start_time).toLocaleTimeString()} →{" "}
+            {s.end_time ? formatTime(s.end_time).toLocaleTimeString() : "Running"}  
             ({s.status})
           </div>
         ))}
