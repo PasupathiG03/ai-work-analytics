@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 
 
 
+
 def start_session(db: Session, user_id: int):
     # 🔒 Check active session
     active = db.query(SessionModel).filter(SessionModel.user_id == user_id,SessionModel.status == "active").first()
@@ -33,7 +34,19 @@ def end_session(db: Session, user_id: int):
         return None
 
     session.end_time = datetime.now(timezone.utc)
-    session.duration = session.end_time - session.start_time
+
+    start = session.start_time
+    end = session.end_time
+
+    # Fix naive datetime (old DB data)
+    if start.tzinfo is None:
+        start = start.replace(tzinfo=timezone.utc)
+
+    if end.tzinfo is None:
+        end = end.replace(tzinfo=timezone.utc)
+
+    session.duration = end - start
+    # session.duration = session.end_time - session.start_time
     session.status = "completed"
     db.commit()
     db.refresh(session)
