@@ -27,11 +27,18 @@ app.include_router(ai.router)
 
 @app.on_event("startup")
 async def startup_event():
-    asyncio.create_task(redis_listener())
+    try:
+        import asyncio
+        asyncio.create_task(redis_listener())
+    except Exception as e:
+        print("Redis startup skipped:", e)
 
 @app.get("/")
 def root():
     return {"message": "API Running Successfully !"}
+
+
+
 
 
 
