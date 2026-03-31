@@ -104,8 +104,8 @@ export default function Dashboard() {
 
         {sessions.map((s) => (
           <div key={s.id} className="border-b py-2 text-sm">
-            ⏱ {formatTime(s.start_time).toLocaleTimeString()} →{" "}
-            {s.end_time ? formatTime(s.end_time).toLocaleTimeString() : "Running"}  
+            ⏱ {formatTime(s.start_time)} →{" "}
+            {s.end_time ? formatTime(s.end_time) : "Running"}  
             ({s.status})
           </div>
         ))}
