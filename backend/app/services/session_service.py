@@ -2,6 +2,9 @@ from sqlalchemy.orm import Session
 from app.models.session import Session as SessionModel
 from datetime import datetime
 from app.services.pubsub import publish_event
+from datetime import datetime, timezone
+
+
 
 def start_session(db: Session, user_id: int):
     # 🔒 Check active session
@@ -29,7 +32,7 @@ def end_session(db: Session, user_id: int):
     if not session:
         return None
 
-    session.end_time = datetime.utcnow()
+    session.end_time = datetime.now(timezone.utc)
     session.duration = session.end_time - session.start_time
     session.status = "completed"
     db.commit()

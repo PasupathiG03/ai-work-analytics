@@ -16,7 +16,7 @@ export default function Dashboard() {
 
     if (active) {
     setIsActive(true);
-    setStartTime(new Date(active.start_time));
+    setStartTime(new Date(active.start_time + "Z"));
     } else {
     setIsActive(false);
     setStartTime(null);
@@ -65,13 +65,7 @@ export default function Dashboard() {
     window.location.href = "/";
     };
 
-    const formatTime = (time) => {
-    return new Date(time).toLocaleTimeString("en-IN", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    });
-  };
+    
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -104,8 +98,8 @@ export default function Dashboard() {
 
         {sessions.map((s) => (
           <div key={s.id} className="border-b py-2 text-sm">
-            ⏱ {formatTime(s.start_time)} →{" "}
-            {s.end_time ? formatTime(s.end_time) : "Running"}  
+            ⏱ {s.start_time && new Date(s.start_time).toLocaleString("en-IN", {timeZone: "Asia/Kolkata",})} →{" "}
+            {s.end_time ? new Date(s.end_time).toLocaleString("en-IN", {timeZone: "Asia/Kolkata",}): "Running"}
             ({s.status})
           </div>
         ))}
