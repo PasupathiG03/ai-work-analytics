@@ -16,7 +16,7 @@ export default function Dashboard() {
 
     if (active) {
     setIsActive(true);
-    setStartTime(new Date(active.start_time + "Z"));
+    setStartTime(new Date(active.start_time));
     } else {
     setIsActive(false);
     setStartTime(null);

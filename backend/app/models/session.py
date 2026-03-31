@@ -8,7 +8,7 @@ class Session(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
-    start_time = Column(DateTime, default=datetime.utcnow)
-    end_time = Column(DateTime, nullable=True)
+    start_time = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    end_time = Column(DateTime(timezone=True), nullable=True)
     duration = Column(Interval, nullable=True)
     status = Column(String, default="active")
