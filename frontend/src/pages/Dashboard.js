@@ -29,7 +29,8 @@ export default function Dashboard() {
   if (startTime) {
     interval = setInterval(() => {
       const now = new Date();
-      const diff = Math.floor((now - startTime) / 1000);
+      // const diff = Math.floor((now - startTime) / 1000);
+      const diff = Math.floor((now.getTime() - startTime.getTime()) / 1000);
 
       const hrs = String(Math.floor(diff / 3600)).padStart(2, "0");
       const mins = String(Math.floor((diff % 3600) / 60)).padStart(2, "0");
@@ -65,6 +66,13 @@ export default function Dashboard() {
     window.location.href = "/";
     };
 
+    const formatTime = (time) => {
+    return new Date(time).toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour12: true,
+    });
+  };
+
     
 
   return (
@@ -98,9 +106,8 @@ export default function Dashboard() {
 
         {sessions.map((s) => (
           <div key={s.id} className="border-b py-2 text-sm">
-            ⏱ {s.start_time && new Date(s.start_time).toLocaleString("en-IN", {timeZone: "Asia/Kolkata",})} →{" "}
-            {s.end_time ? new Date(s.end_time).toLocaleString("en-IN", {timeZone: "Asia/Kolkata",}): "Running"}
-            ({s.status})
+            ⏱ {formatTime(s.start_time)} →{" "}
+            {s.end_time ? formatTime(s.end_time) : "Running"} ({s.status})
           </div>
         ))}
       </div>
