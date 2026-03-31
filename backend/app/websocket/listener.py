@@ -6,6 +6,8 @@ from app.websocket.manager import manager
 CHANNEL = "session_updates"
 
 async def redis_listener():
+    if redis_client is None:
+        return
     try:
         pubsub = redis_client.pubsub()
         pubsub.subscribe(CHANNEL)
