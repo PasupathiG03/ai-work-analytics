@@ -7,14 +7,20 @@ export default function Register() {
   const [password, setPassword] = useState("");
 
   const handleRegister = async () => {
-    await API.post("/auth/register", {
-      username,
-      email,
-      password,
-    });
-
-    alert("Registered successfully!");
-    window.location.href = "/";
+    try {
+      await API.post("/auth/register", {username,email,password,});
+      alert("Registered successfully!");
+      window.location.href = "/";
+    }catch (err) {
+    if (err.response?.data?.detail) {
+      alert(err.response.data.detail);
+    } else {
+      alert("Registration failed");
+    }
+  } finally {
+    setLoading(false);
+  }
+    
   };
 
  return (

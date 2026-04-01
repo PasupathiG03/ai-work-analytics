@@ -6,13 +6,17 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    const res = await API.post("/auth/login", {
-      email,
-      password,
-    });
-
-    localStorage.setItem("token", res.data.access_token);
-    window.location.href = "/dashboard";
+    setLoading(true);
+    try {
+      const res = await API.post("/auth/login", { email, password });
+      localStorage.setItem("token", res.data.access_token);
+      window.location.href = "/dashboard";
+    } catch (err) {
+    alert(err.response?.data?.detail || "Login failed");
+    }finally {
+      setLoading(false);
+    }
+    
   };
 
   

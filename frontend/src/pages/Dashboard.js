@@ -24,6 +24,11 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
+  fetch("https://ai-work-analytics.onrender.com");
+  if (!localStorage.getItem("token")) {
+    window.location.href = "/";
+    return;
+  }
   let interval;
 
   if (startTime) {
