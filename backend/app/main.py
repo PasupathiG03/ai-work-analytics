@@ -10,9 +10,13 @@ from app.websocket.listener import redis_listener
 
 app = FastAPI()
 
+origins = [
+    "https://ai-work-analytics.vercel.app",  
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ai-work-analytics.vercel.app/"],  # for now (later restrict)
+    allow_origins=origins,  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
