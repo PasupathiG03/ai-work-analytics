@@ -30,7 +30,7 @@ return (
             <input className="w-full border p-2 mb-4 rounded" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
             <input className="w-full border p-2 mb-4 rounded" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
 
-            <button onClick={handleLogin} className="w-full bg-blue-500 text-white py-2 rounded-lg mb-4">Login</button>
+            <button onClick={handleLogin} disabled={loading} className="w-full bg-blue-500 text-white py-2 rounded-lg mb-4">{loading ? "Logging in..." : "Login"}Login</button>
             <button onClick={() => (window.location.href = "/register")} className="w-full bg-blue-500 text-white py-2 rounded-lg">Go to Register</button>
         </div>
     </div>

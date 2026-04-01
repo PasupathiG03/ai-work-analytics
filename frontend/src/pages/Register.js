@@ -33,7 +33,10 @@ export default function Register() {
             <input className="w-full border p-2 mb-4 rounded" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
             <input className="w-full border p-2 mb-4 rounded" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
 
-            <button onClick={handleRegister} className="w-full bg-blue-500 text-white py-2 rounded-lg mb-4">Register</button>
+            <button onClick={handleLogin} disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
+
+
+            <button onClick={handleRegister} disabled={loading} className="w-full bg-blue-500 text-white py-2 rounded-lg mb-4">{loading ? "Registering in..." : "Register"}Register</button>
             <button onClick={() => (window.location.href = "/")} className="w-full bg-blue-500 text-white py-2 rounded-lg">Go to Login</button>
         </div>
     </div>
