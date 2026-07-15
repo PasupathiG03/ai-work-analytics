@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from app.api import auth
 from app.core.database import Base, engine
-from app.api import auth, session, ws1
-from app.api import ai
+from app.api import auth, session, ws1, ai, admin
 from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 import os
@@ -35,6 +34,7 @@ app.include_router(auth.router)
 app.include_router(session.router)
 app.include_router(ws1.router)
 app.include_router(ai.router)
+app.include_router(admin.router)
 
 @app.on_event("startup")
 async def startup_event():

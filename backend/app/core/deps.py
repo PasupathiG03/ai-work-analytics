@@ -39,3 +39,8 @@ def get_current_user(
     user = db.query(User).filter(User.id == int(user_id)).first()
 
     return user
+
+def get_current_admin(current_user: User = Depends(get_current_user)):
+    if not current_user or not current_user.is_admin:
+        raise HTTPException(status_code=403, detail="Admin permissions required")
+    return current_user
