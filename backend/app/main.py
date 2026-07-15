@@ -5,6 +5,7 @@ from app.api import auth, session, ws1
 from app.api import ai
 from fastapi.middleware.cors import CORSMiddleware
 import asyncio
+import os
 from app.websocket.listener import redis_listener
 
 
@@ -12,7 +13,13 @@ app = FastAPI()
 
 origins = [
     "https://ai-work-analytics.vercel.app",  
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
+
+frontend_url = os.getenv("FRONTEND_URL")
+if frontend_url:
+    origins.append(frontend_url)
 
 app.add_middleware(
     CORSMiddleware,
